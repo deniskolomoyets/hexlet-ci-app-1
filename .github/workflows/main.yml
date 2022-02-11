@@ -4,25 +4,25 @@ on:
   - push
 
 jobs:
-  build:
-
+  linter:
     runs-on: ubuntu-latest
-
     steps:
-    
-     - uses: actions/checkout@v2
-     - uses: actions/setup-node@v2
-       with:
-         node-version: '16'
-         cache: 'npm'
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v2
+        name: setup node
+        with:
+          node-version: "16"
 
-     - name: Setup
-       run: make setup
-     - name: Test
-       run: make test
-     - name: Lint
-       run: make lint
-     - name: Run Snyk to check for vulnerabilities
+      - name: setup project
+        run: make setup
+
+      - name: test
+        run: make test
+
+      - name: linter
+        run: make lint
+
+      - name: Run Snyk to check for vulnerabilities
         uses: snyk/actions/node@master
         env:
           SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
