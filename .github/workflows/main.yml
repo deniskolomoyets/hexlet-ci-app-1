@@ -6,7 +6,6 @@ jobs:
   build:
     # операционная система для работы воркфлоу
     runs-on: ubuntu-latest
-      steps:
       - run: make install
       - run: make build
       - run: make start
